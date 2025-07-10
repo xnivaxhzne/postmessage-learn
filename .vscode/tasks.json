@@ -1,0 +1,33 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "serve parent file",
+      "type": "shell",
+      "command": "npx http-server -p 4200",
+      "options": {
+        "cwd": "parent"
+      }
+    },
+    {
+      "label": "serve child file",
+      "type": "shell",
+      "command": "npx http-server -p 4201",
+      "options": {
+        "cwd": "child"
+      }
+    },
+    {
+      "label": "Serve both parent and child",
+      "type": "shell",
+      "dependsOrder": "parallel",
+      "dependsOn": ["serve parent file", "serve child file"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

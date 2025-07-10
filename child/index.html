@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Child Document</h1>
+    <p>Message from parent: <span id="message"></span></p>
+    <button id="sendButton">Send to parent</button>
+
+    <script>
+        window.addEventListener('message', ({ data, origin }) => {
+            if (origin !== 'http://127.0.0.1:4200') return;
+            const messageEl = document.getElementById('message')
+            messageEl.innerHTML = data
+        })
+        document.getElementById('sendButton').addEventListener('click', () => {
+            window.parent.postMessage(new Date().toLocaleTimeString(), "http://127.0.0.1:4200")
+        })
+    </script>
+</body>
+
+</html>
